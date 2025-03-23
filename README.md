@@ -12,7 +12,7 @@ A Neovim plugin that leverages Telescope to display files from git status, provi
 - [Telescope](https://github.com/nvim-telescope/telescope.nvim)
 
 
-Using packer.nvim:
+[Using packer.nvim](https://github.com/wbthomason/packer.nvim):
 
 ```lua
 use {
@@ -21,7 +21,7 @@ use {
 }
 ```
 
-Using lazy.nvim:
+[Using lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
@@ -33,9 +33,10 @@ Using lazy.nvim:
 }
 ```
 
-Using vim-plug:
+[Using vim-plug](https://github.com/junegunn/vim-plug):
 
 ```vim
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'vicorvf/simple-git-status.nvim'
 ```
 
