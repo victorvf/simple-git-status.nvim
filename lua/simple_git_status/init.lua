@@ -1,3 +1,14 @@
+local M = {}
+
+
+M.config = {
+    mappings = {
+        git_status = "<leader>gs",
+    },
+    setup_mappings = true,
+}
+
+
 local function get_by_dir(dir_path, status)
     local handle = io.popen(
         "git ls-files --others --full-name " .. dir_path .. " 2>/dev/null"
@@ -58,13 +69,18 @@ local function get_git_files()
 end
 
 
-local function git_status_picker()
+local function M.git_status()
   local pickers = require("telescope.pickers")
   local finders = require("telescope.finders")
   local sorters = require("telescope.sorters")
   local conf = require("telescope.config").values
 
   local files = get_git_files()
+
+  if #files == 0 then
+    print("No changes found")
+    return
+  end
 
   pickers.new({}, {
     prompt_title = "Git Status Files",
@@ -84,5 +100,23 @@ local function git_status_picker()
   }):find()
 end
 
-return { git_status = git_status_picker }
+
+function M.setup(opts)
+    opts = opts or {}
+    M.config = vim.tbl_deep_extend("force", M.config, opts)
+
+    if M.config.setup_mappings then
+        if M.config.mappings.git_status then
+            vim.api.nvim_set_keymap(
+                "n",
+                M.config.mappings.git_status,
+                "<cmd>lua require('git_files').git_status()<CR>",
+                { noremap = true, silent = true }
+            )
+        end
+    end
+end
+
+
+return M
 
