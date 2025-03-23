@@ -69,7 +69,7 @@ local function get_git_files()
 end
 
 
-local function M.git_status()
+function M.git_status()
   local pickers = require("telescope.pickers")
   local finders = require("telescope.finders")
   local sorters = require("telescope.sorters")
@@ -110,7 +110,7 @@ function M.setup(opts)
             vim.api.nvim_set_keymap(
                 "n",
                 M.config.mappings.git_status,
-                "<cmd>lua require('git_files').git_status()<CR>",
+                "<cmd>lua require('simple_git_status').git_status()<CR>",
                 { noremap = true, silent = true }
             )
         end
@@ -119,4 +119,3 @@ end
 
 
 return M
-
